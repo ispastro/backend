@@ -8,27 +8,44 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     //  GET /api/tasks
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Task::all());
+        $status = $request->query('status', 'all'); // Get status from query parameter, default to 'all'
+
+        if ($status === 'completed') {
+            $tasks = Task::where('completed', true)->get();
+        } elseif ($status === 'pending') {
+            $tasks = Task::where('completed', false)->get();
+        } else {
+            $tasks = Task::all();
+        }
+
+        return response()->json($tasks);
     }
 
     //  POST /api/tasks
     public function store(Request $request)
-    {
-        // Validate input
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-        ]);
+{
+    // Validate input
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string', // Add this if description is optional
+    ]);
 
-        // Create task
-        $task = Task::create([
-            'title' => $validated['title'],
-            'completed' => false,
-        ]);
+    // Create task
+    $task = Task::create([
+        'title' => $validated['title'],
+        'description' => $validated['description'] ?? null,
+        'completed' => false,
+    ]);
 
-        return response()->json($task, 201); // 201 = Created
-    }
+    // Pro API Response
+    return response()->json([
+        'status' => 'success',
+        'data' => $task,
+    ], 201); // 201 = Created
+}
+
 
     // PUT /api/tasks/{id}
     public function update($id)

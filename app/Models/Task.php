@@ -8,7 +8,7 @@ class Task extends Model
 {
     //
 
-    protected $fillable = ['title', 'completed']; // Fillable attributes for mass assignment
+    protected $fillable = ['title', 'description', 'completed']; // Fillable attributes for mass assignment
     protected $casts = [
         'completed' => 'boolean', // Cast 'completed' attribute to boolean
     ];

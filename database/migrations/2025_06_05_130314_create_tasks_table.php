@@ -11,6 +11,7 @@ return new class extends Migration {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();                         // Auto-incrementing ID
             $table->string('title');              // Task title
+            $table->text('description')->nullable();         // Task description
             $table->boolean('completed')->default(false); // Task status
             $table->timestamps();                 // created_at and updated_at
         });
