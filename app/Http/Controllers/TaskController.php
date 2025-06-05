@@ -29,8 +29,17 @@ class TaskController extends Controller
     // Validate input
     $validated = $request->validate([
         'title' => 'required|string|max:255',
-        'description' => 'nullable|string', // Add this if description is optional
-    ]);
+        'description' => 'nullable|string|max:1000', // Add this if description is optional
+    ], 
+    [
+        'title.required' => 'The title field is required.',
+        'title.string' => 'The title must be a string.',
+        'title.max' => 'The title may not be greater than 255 characters.',
+        'description.string' => 'The description must be a string.',
+        'description.max' => 'The description may not be greater than 1000 characters.',
+    ]
+
+);
 
     // Create task
     $task = Task::create([
@@ -39,7 +48,7 @@ class TaskController extends Controller
         'completed' => false,
     ]);
 
-    // Pro API Response
+    // API Response
     return response()->json([
         'status' => 'success',
         'data' => $task,
