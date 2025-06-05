@@ -1,3 +1,103 @@
+📝 Task Manager RESTful API
+A simple, production-ready Task Manager API built with Laravel 12 and connected to a Supabase PostgreSQL remote database. This API allows users to manage tasks (create, view, update, delete) with filtering and validations.
+
+🚀 Features
+✅ RESTful API architecture
+
+📦 Laravel 12 framework
+
+🗃 Supabase PostgreSQL as the remote database
+
+🧪 Validation with Laravel's Request system
+
+📂 Clean controller and route structure
+
+🔍 Task filtering (completed & pending)
+
+🔐 Ready to extend with authentication (optional)
+
+
+⚙️ Setup Instructions
+1. Clone the Repository
+
+git clone https://github.com/ispastro/backend.git
+cd backend
+2. Install Dependencies
+
+composer install
+
+
+3. Environment Configuration
+Update your .env file with your Supabase PostgreSQL credentials:
+
+DB_CONNECTION=pgsql
+DB_HOST=aws-0-us-east-2.pooler.supabase.com
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+
+php artisan key:generate
+
+
+php artisan migrate
+
+
+
+| Method | Endpoint          | Description              |
+| ------ | ----------------- | ------------------------ |
+| GET    | `/api/tasks`      | List all tasks           |
+| POST   | `/api/tasks`      | Create a new task        |
+| PUT    | `/api/tasks/{id}` | Mark a task as completed |
+| DELETE | `/api/tasks/{id}` | Delete a task            |
+
+
+
+📥 Sample JSON for Creating a Task
+json
+
+{
+  "title": "Finish Laravel API",
+  "description": "Implement task CRUD with Supabase"
+}
+
+
+🔍 Filtering Tasks
+To filter tasks:
+
+Completed: /api/tasks?status=completed
+
+Pending: /api/tasks?status=pending
+
+(Adjust your TaskController@index() if needed.)
+
+
+🛠 Technologies Used
+Laravel 12
+
+PHP 8+
+
+Supabase PostgreSQL
+
+Eloquent ORM
+
+RESTful API principles
+
+📈 Future Improvements
+✅ Add user authentication with Laravel Sanctum or Passport
+
+✅ Add pagination
+
+✅ Add soft deletes and timestamps
+
+✅ Build a frontend using React or Vue
+
+
+👨‍💻 Author
+Haile Asaye 
+Laravel Developer | Information Systems @ AAU
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
